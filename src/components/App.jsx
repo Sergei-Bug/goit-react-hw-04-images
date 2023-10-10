@@ -1,21 +1,16 @@
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
-import { Component } from 'react';
+import { useState } from 'react';
 
-export class App extends Component {
-  state = {
-    searchName: '',
+export function App() {
+  const [searchName, setSearchName] = useState('');
+  const setSearchNameInState = searchName => {
+    setSearchName(searchName);
   };
-
-  setSearchNameInState = searchName => {
-    this.setState({ searchName });
-  };
-  render() {
-    return (
-      <>
-        <Searchbar onSubmit={this.setSearchNameInState} />
-        <ImageGallery searchName={this.state.searchName} />
-      </>
-    );
-  }
+  return (
+    <>
+      <Searchbar onSubmit={setSearchNameInState} />
+      <ImageGallery searchName={searchName} />
+    </>
+  );
 }
