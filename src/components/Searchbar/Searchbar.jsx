@@ -1,0 +1,44 @@
+import PropTypes from 'prop-types';
+import { Component } from 'react';
+import { BsSearch } from 'react-icons/bs';
+
+import { Header, Form, Button, Input } from './Searchbar.styled';
+
+class Searchbar extends Component {
+  state = {
+    search: '',
+  };
+  handleChangeInput = e => {
+    this.setState({ search: e.target.value });
+  };
+  handleSubmitInput = e => {
+    e.preventDefault();
+    this.props.onSubmit(this.state.search);
+  };
+  render() {
+    return (
+      <Header>
+        <Form onSubmit={this.handleSubmitInput}>
+          <Input
+            style={{ fontSize: '16px' }}
+            type="text"
+            placeholder="Search images and photos"
+            value={this.state.search}
+            onChange={this.handleChangeInput}
+          />
+
+          <Button type="submit">
+            <span style={{ fontSize: '16px', color: '#3f51b5' }}>
+              <BsSearch style={{ fill: '#3f51b5', marginRight: '5px' }} />
+              Search
+            </span>
+          </Button>
+        </Form>
+      </Header>
+    );
+  }
+}
+export default Searchbar;
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
